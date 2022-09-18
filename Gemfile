@@ -69,4 +69,22 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+    
+  # A testing framework for Rails 5+
+  gem 'rspec-rails', '~> 5.1', '>= 5.1.2'
+  
+  # Strategies for cleaning databases. Can be used to ensure a clean slate for testing.
+  gem 'database_cleaner', '~> 2.0', '>= 2.0.1'
+
+  # Code coverage for Ruby with a powerful configuration library and automatic merging of coverage across test suites
+  gem 'simplecov', '~> 0.21.2'
+
+  # factory_bot_rails provides integration between factory_bot and rails 5.0 or newer
+  gem 'factory_bot_rails', '~> 6.2'
+
+  # Faker, a port of Data::Faker from Perl, is used to easily generate fake data: names, addresses, phone numbers, etc.
+  gem 'faker', '~> 2.23'
+
+  # Shoulda Matchers provides RSpec- and Minitest-compatible one-liners to test common Rails functionality that, if written by hand, would be much longer, more complex, and error-prone.
+  gem 'shoulda-matchers', '~> 5.2'
 end
