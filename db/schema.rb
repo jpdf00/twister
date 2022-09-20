@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_20_090347) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_20_091726) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -40,6 +40,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_20_090347) do
     t.text "text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "reply_id"
+    t.index ["reply_id"], name: "index_posts_on_reply_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -61,5 +63,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_20_090347) do
   add_foreign_key "likes", "users"
   add_foreign_key "networks", "users", column: "being_followed_id"
   add_foreign_key "networks", "users", column: "is_following_id"
+  add_foreign_key "posts", "posts", column: "reply_id"
   add_foreign_key "posts", "users"
 end
