@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_20_081604) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_20_085026) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -23,6 +23,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_20_081604) do
     t.index ["being_followed_id"], name: "index_networks_on_being_followed_id"
     t.index ["is_following_id", "being_followed_id"], name: "uniq_connection", unique: true
     t.index ["is_following_id"], name: "index_networks_on_is_following_id"
+  end
+
+  create_table "posts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.text "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -41,4 +49,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_20_081604) do
 
   add_foreign_key "networks", "users", column: "being_followed_id"
   add_foreign_key "networks", "users", column: "is_following_id"
+  add_foreign_key "posts", "users"
 end
