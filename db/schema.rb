@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_19_130153) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_20_081604) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -21,6 +21,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_19_130153) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["being_followed_id"], name: "index_networks_on_being_followed_id"
+    t.index ["is_following_id", "being_followed_id"], name: "uniq_connection", unique: true
     t.index ["is_following_id"], name: "index_networks_on_is_following_id"
   end
 
