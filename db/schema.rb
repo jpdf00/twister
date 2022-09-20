@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_20_085026) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_20_090347) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "likes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "post_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_likes_on_post_id"
+    t.index ["user_id", "post_id"], name: "uniq_like", unique: true
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
 
   create_table "networks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "is_following_id", null: false
@@ -47,6 +57,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_20_085026) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "likes", "posts"
+  add_foreign_key "likes", "users"
   add_foreign_key "networks", "users", column: "being_followed_id"
   add_foreign_key "networks", "users", column: "is_following_id"
   add_foreign_key "posts", "users"

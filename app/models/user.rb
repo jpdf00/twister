@@ -11,4 +11,5 @@ class User < ApplicationRecord
   has_many :followers, through: :being_followeds, source: :is_following
   has_many :followings, through: :is_followings, source: :being_followed
   has_many :posts
+  has_many :likes
 end
