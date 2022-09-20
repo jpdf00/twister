@@ -1,0 +1,27 @@
+<%= form_with(model: network) do |form| %>
+  <% if network.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(network.errors.count, "error") %> prohibited this network from being saved:</h2>
+
+      <ul>
+        <% network.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :is_following_id, style: "display: block" %>
+    <%= form.text_field :is_following_id %>
+  </div>
+
+  <div>
+    <%= form.label :being_followed_id, style: "display: block" %>
+    <%= form.text_field :being_followed_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
