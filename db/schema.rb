@@ -40,8 +40,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_20_091726) do
     t.text "text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid "reply_id"
-    t.index ["reply_id"], name: "index_posts_on_reply_id"
+    t.uuid "replied_to_id"
+    t.index ["replied_to_id"], name: "index_posts_on_replied_to_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -53,7 +53,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_20_091726) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "username"
+    t.string "username", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
@@ -63,6 +63,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_20_091726) do
   add_foreign_key "likes", "users"
   add_foreign_key "networks", "users", column: "being_followed_id"
   add_foreign_key "networks", "users", column: "is_following_id"
-  add_foreign_key "posts", "posts", column: "reply_id"
+  add_foreign_key "posts", "posts", column: "replied_to_id"
   add_foreign_key "posts", "users"
 end
