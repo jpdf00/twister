@@ -37,7 +37,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_20_091726) do
 
   create_table "posts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
-    t.text "text"
+    t.text "text", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "replied_to_id"

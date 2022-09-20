@@ -5,5 +5,5 @@ class Post < ApplicationRecord
   has_many :replies, class_name: "Post", foreign_key: "replied_to_id"
   has_many :likes
 
-  validates :text, length: { maximum: 250 }
+  validates :text, length: { maximum: 250 }, presence: true
 end
